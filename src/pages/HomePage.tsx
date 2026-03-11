@@ -12,6 +12,7 @@ export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [activeTab, setActiveTab] = useState('All')
   const countersStarted = useRef(false)
+  const prevStep = useRef(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,7 +37,10 @@ export default function HomePage() {
         const total = pw.offsetHeight - window.innerHeight
         if (scrolled >= 0 && scrolled <= total) {
           const step = Math.min(3, Math.floor((scrolled / total) * 4))
-          goStep(step)
+          if (step !== prevStep.current) {
+            prevStep.current = step
+            goStep(step)
+          }
         }
       }
 
@@ -72,7 +76,7 @@ export default function HomePage() {
         }
       }
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -91,6 +95,12 @@ export default function HomePage() {
     { q: 'Do you offer post-launch support?', a: 'Yes. Maintenance packages covering updates, monitoring, security patches and feature additions.' },
     { q: 'Can you redesign my existing website?', a: 'Absolutely — redesigns are our specialty. We analyze what works, what doesn\'t, and build something better.' },
     { q: 'Do you work with international clients?', a: 'Yes. Fully distributed team, async-friendly, and we adapt to your timezone for calls.' },
+  ]
+
+  const testimonials = [
+    { quote: 'WebCraftLabs built our entire SaaS platform in 12 weeks. The quality was exceptional — every detail was considered. We\'ve since tripled our user base.', name: 'James Carter', role: 'CEO, TechNova Inc.', initials: 'JC' },
+    { quote: 'From the first call, they understood exactly what we needed. Our e-commerce revenue jumped 142% in the first quarter after launch. Incredible results.', name: 'Priya Sharma', role: 'Co-Founder, Bloom Beauty', initials: 'PS' },
+    { quote: 'The redesign of our platform was seamless. They handled everything — design, development, migration. Zero downtime. Our team adoption rate hit 98%.', name: 'Daniel Wright', role: 'CTO, Meridian Group', initials: 'DW' },
   ]
 
   const processSteps = [
@@ -376,6 +386,34 @@ export default function HomePage() {
             { ico: '🎨', nm: 'Figma' }, { ico: '📱', nm: 'React Native' }, { ico: '🔷', nm: 'TypeScript' },
           ].map(t => (
             <div key={t.nm} className="tt"><div className="tico">{t.ico}</div><div className="tnm">{t.nm}</div></div>
+          ))}
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section id="testimonials" style={{ background: '#0a0a0a', padding: '110px 48px' }}>
+        <div className="sl2" style={{ color: 'rgba(255,255,255,.3)' }}>Testimonials</div>
+        <h2 className="st" style={{ color: '#fff', marginBottom: 56 }}>CLIENT<br />STORIES</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2 }}>
+          {testimonials.map((t, i) => (
+            <div key={i} style={{
+              background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.08)',
+              padding: '40px 36px', display: 'flex', flexDirection: 'column', gap: 28,
+              transition: 'background .3s', cursor: 'default',
+            }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,.06)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,.03)'}
+            >
+              <div style={{ fontFamily: "'Courier New',monospace", fontSize: '2rem', color: 'rgba(255,255,255,.12)', lineHeight: 1 }}>"</div>
+              <p style={{ fontFamily: "'Courier New',monospace", fontSize: '.7rem', color: 'rgba(255,255,255,.5)', lineHeight: 2, flex: 1 }}>{t.quote}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderTop: '1px solid rgba(255,255,255,.07)', paddingTop: 20 }}>
+                <div style={{ width: 38, height: 38, background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Courier New',monospace", fontWeight: 900, fontSize: '.65rem', color: 'rgba(255,255,255,.6)', flexShrink: 0 }}>{t.initials}</div>
+                <div>
+                  <div style={{ fontFamily: "'Courier New',monospace", fontWeight: 700, fontSize: '.72rem', color: '#fff', letterSpacing: '.04em', textTransform: 'uppercase' }}>{t.name}</div>
+                  <div style={{ fontFamily: "'Courier New',monospace", fontSize: '.58rem', color: 'rgba(255,255,255,.3)', letterSpacing: '.08em', marginTop: 2 }}>{t.role}</div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </section>

@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', email: '', company: '', budget: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', company: '', budget: '', service: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,16 +26,37 @@ export default function ContactPage() {
           </p>
           <div className="contact-info">
             <div className="contact-info-item">
-              <div className="contact-info-label">Email</div>
+              <div className="contact-info-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Mail size={11} /> Email</div>
               <a href="mailto:hello@webcraftlabs.com" className="contact-info-value">hello@webcraftlabs.com</a>
             </div>
             <div className="contact-info-item">
-              <div className="contact-info-label">Phone</div>
+              <div className="contact-info-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Phone size={11} /> Phone</div>
               <a href="tel:+15550000000" className="contact-info-value">+1 (555) 000-0000</a>
             </div>
             <div className="contact-info-item">
-              <div className="contact-info-label">Location</div>
+              <div className="contact-info-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><MapPin size={11} /> Location</div>
               <div className="contact-info-value">San Francisco, CA<br />Remote-friendly worldwide</div>
+            </div>
+            <div className="contact-info-item">
+              <div className="contact-info-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Clock size={11} /> Response Time</div>
+              <div className="contact-info-value">Within 24 hours</div>
+            </div>
+          </div>
+
+          {/* Quick links */}
+          <div style={{ marginTop: 40, padding: '24px', background: '#f4f4f4', border: '1px solid #e2e2e2' }}>
+            <div style={{ fontFamily: "'Courier New',monospace", fontSize: '.55rem', color: '#999', letterSpacing: '.16em', textTransform: 'uppercase', marginBottom: 14 }}>Quick Links</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {[
+                { label: 'View our work →', to: '/#work' },
+                { label: 'See pricing →', to: '/pricing' },
+                { label: 'Read the FAQ →', to: '/faq' },
+              ].map(l => (
+                <Link key={l.to} to={l.to} style={{ fontFamily: "'Courier New',monospace", fontSize: '.68rem', color: '#0a0a0a', textDecoration: 'none', transition: 'opacity .2s' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '0.5'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
+                >{l.label}</Link>
+              ))}
             </div>
           </div>
         </div>
@@ -68,12 +90,26 @@ export default function ContactPage() {
                   <label>Budget Range</label>
                   <select value={form.budget} onChange={e => setForm({...form, budget: e.target.value})}>
                     <option value="">Select a range</option>
+                    <option value="2k-5k">$2K – $5K</option>
                     <option value="5k-15k">$5K – $15K</option>
                     <option value="15k-30k">$15K – $30K</option>
                     <option value="30k-50k">$30K – $50K</option>
                     <option value="50k+">$50K+</option>
                   </select>
                 </div>
+              </div>
+              <div className="form-group full" style={{ marginBottom: 16 }}>
+                <label>Service Needed</label>
+                <select value={form.service} onChange={e => setForm({...form, service: e.target.value})}>
+                  <option value="">Select a service</option>
+                  <option value="website">Website Development</option>
+                  <option value="branding">Branding & Design</option>
+                  <option value="saas">SaaS Product</option>
+                  <option value="ecommerce">E-Commerce</option>
+                  <option value="app">App Development</option>
+                  <option value="seo">SEO & Performance</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
               <div className="form-group full">
                 <label>Tell us about your project *</label>

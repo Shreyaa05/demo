@@ -18,6 +18,15 @@ const values = [
   { num: '04', title: 'Innovation', desc: 'We stay at the bleeding edge. Modern frameworks, AI integration, performance optimization — always pushing forward.' },
 ]
 
+const milestones = [
+  { year: '2018', event: 'Founded in San Francisco with a team of 3 engineers and 1 designer.' },
+  { year: '2019', event: 'First 50 projects delivered. Expanded team to 8 specialists.' },
+  { year: '2020', event: 'Pivoted to fully remote. Onboarded first international enterprise clients.' },
+  { year: '2021', event: '100+ projects milestone. Launched SaaS development practice.' },
+  { year: '2023', event: 'Expanded to 15+ team members across 6 countries. $10M+ in client revenue generated.' },
+  { year: '2025', event: '350+ projects delivered. Recognized as top agency on Clutch and DesignRush.' },
+]
+
 export default function AboutPage() {
   return (
     <>
@@ -45,7 +54,7 @@ export default function AboutPage() {
           { t: '350+', lbl: 'Projects Delivered' },
           { t: '15+', lbl: 'Team Members' },
           { t: '8', lbl: 'Years in Business' },
-          { t: '12', lbl: 'Countries Served' },
+          { t: '20+', lbl: 'Countries Served' },
         ].map(s => (
           <div key={s.lbl} className="sc2">
             <div className="snum"><span>{s.t}</span></div>
@@ -53,6 +62,26 @@ export default function AboutPage() {
           </div>
         ))}
       </div>
+
+      {/* Mission */}
+      <section style={{ padding: '110px 48px', background: '#fff', borderBottom: '1px solid #e2e2e2' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: 80, alignItems: 'start' }}>
+          <div>
+            <div className="sl2">Mission</div>
+            <h2 className="st">OUR<br />PURPOSE</h2>
+          </div>
+          <div>
+            <p style={{ fontFamily: "'Courier New',monospace", fontSize: '1.1rem', color: '#0a0a0a', lineHeight: 1.7, fontWeight: 700, letterSpacing: '.02em', marginBottom: 24 }}>
+              "We exist to help ambitious businesses build digital products that are fast, beautiful, and genuinely useful."
+            </p>
+            <p style={{ fontFamily: "'Courier New',monospace", fontSize: '.72rem', color: '#777', lineHeight: 2 }}>
+              We believe that great software is a craft. It requires not just technical skill, but deep empathy for users, 
+              obsessive attention to detail, and the courage to push back when something isn't good enough.
+              That's the standard we hold ourselves to on every single project.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Values */}
       <section className="about-values">
@@ -64,6 +93,23 @@ export default function AboutPage() {
               <div className="value-num">{v.num}</div>
               <div className="value-title">{v.title}</div>
               <div className="value-desc">{v.desc}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section style={{ padding: '110px 48px', background: '#0a0a0a' }}>
+        <div className="sl2" style={{ color: 'rgba(255,255,255,.3)' }}>History</div>
+        <h2 className="st" style={{ color: '#fff', marginBottom: 64 }}>OUR<br />JOURNEY</h2>
+        <div style={{ maxWidth: 700 }}>
+          {milestones.map((m, i) => (
+            <div key={i} style={{
+              display: 'grid', gridTemplateColumns: '80px 1fr', gap: 32, alignItems: 'start',
+              padding: '24px 0', borderTop: '1px solid rgba(255,255,255,.07)'
+            }}>
+              <div style={{ fontFamily: "'Courier New',monospace", fontWeight: 900, fontSize: '.7rem', color: 'rgba(255,255,255,.35)', letterSpacing: '.1em', paddingTop: 3 }}>{m.year}</div>
+              <div style={{ fontFamily: "'Courier New',monospace", fontSize: '.72rem', color: 'rgba(255,255,255,.55)', lineHeight: 1.9 }}>{m.event}</div>
             </div>
           ))}
         </div>
