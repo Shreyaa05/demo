@@ -16,14 +16,16 @@ export default function Footer() {
           <h4>Company</h4>
           <Link to="/about">About Us</Link>
           <Link to="/#work">Our Work</Link>
-          <Link to="/#pw">Process</Link>
+          <Link to="/pricing">Pricing</Link>
+          <Link to="/faq">FAQ</Link>
           <Link to="/contact">Contact</Link>
         </div>
         <div className="fc">
-          <h4>Contact</h4>
+          <h4>Account</h4>
+          <Link to="/login">Log In</Link>
+          <Link to="/contact">Get Started</Link>
           <a href="mailto:hello@webcraftlabs.com">hello@webcraftlabs.com</a>
           <a href="tel:+15550000000">+1 (555) 000-0000</a>
-          <Link to="/contact">Schedule a Call</Link>
         </div>
       </div>
       <div className="fbot">

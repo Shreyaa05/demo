@@ -67,8 +67,32 @@ export default function ServicesPage() {
             From concept to launch — every layer handled by specialists. We don't do mediocre.
             Every project gets the same obsessive attention to quality, performance, and craft.
           </p>
+          <div style={{ display: 'flex', gap: 12, marginTop: 32, flexWrap: 'wrap' }}>
+            <Link to="/contact" className="bw" style={{ fontSize: '.65rem', padding: '11px 22px' }}>Start a Project ↗</Link>
+            <Link to="/pricing" className="bgh" style={{ fontSize: '.65rem', padding: '11px 22px' }}>View Pricing →</Link>
+          </div>
+        </div>
+        <div className="page-hero-img">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80" alt="Development work" />
         </div>
       </section>
+
+      {/* Quick service nav */}
+      <div style={{ display: 'flex', borderTop: '1px solid #e2e2e2', borderBottom: '1px solid #e2e2e2', overflowX: 'auto' }}>
+        {services.map(s => (
+          <div key={s.num} style={{
+            padding: '16px 28px', fontFamily: "'Courier New',monospace", fontSize: '.58rem',
+            letterSpacing: '.1em', textTransform: 'uppercase', color: '#999',
+            borderRight: '1px solid #e2e2e2', whiteSpace: 'nowrap', cursor: 'default',
+            transition: 'color .2s, background .2s', flexShrink: 0
+          }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#0a0a0a'; (e.currentTarget as HTMLElement).style.background = '#f4f4f4' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#999'; (e.currentTarget as HTMLElement).style.background = 'transparent' }}
+          >
+            <span style={{ color: 'rgba(0,0,0,.25)', marginRight: 8 }}>{s.num}</span>{s.title}
+          </div>
+        ))}
+      </div>
 
       {/* Services List */}
       <section className="services-list">
@@ -96,6 +120,31 @@ export default function ServicesPage() {
           </div>
         ))}
       </section>
+
+      {/* Process teaser */}
+      <div style={{ background: '#f4f4f4', padding: '80px 48px', borderTop: '1px solid #e2e2e2' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+          <div>
+            <div className="sl2">Process</div>
+            <h2 className="st" style={{ marginBottom: 20 }}>HOW WE<br />DO IT</h2>
+            <p style={{ fontFamily: "'Courier New',monospace", fontSize: '.7rem', color: '#777', lineHeight: 2, marginBottom: 28, maxWidth: 380 }}>
+              Every project follows the same four-phase process. Proven, transparent, and engineered to deliver exceptional results on time.
+            </p>
+            <Link to="/" className="nbtn" style={{ display: 'inline-flex', background: '#0a0a0a', color: '#fff', borderColor: '#0a0a0a' }}>See how we work →</Link>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            {[
+              { n: '01', t: 'Discovery' }, { n: '02', t: 'Design' },
+              { n: '03', t: 'Development' }, { n: '04', t: 'Launch' }
+            ].map(p => (
+              <div key={p.n} style={{ background: '#fff', border: '1px solid #e2e2e2', padding: '28px 24px' }}>
+                <div style={{ fontFamily: "'Courier New',monospace", fontWeight: 900, fontSize: '2.5rem', color: 'rgba(0,0,0,.06)' }}>{p.n}</div>
+                <div style={{ fontFamily: "'Courier New',monospace", fontWeight: 700, fontSize: '.85rem', letterSpacing: '.06em', textTransform: 'uppercase', marginTop: 8 }}>{p.t}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* CTA */}
       <div id="cta">
